@@ -71,11 +71,11 @@ inquirer
     ])
 
     .then((answers) => {
-        if (answers.role === 'Manager') {
+        if (answers.office !== undefined) {
             const manager = new Manager('manager', 'office', 'email');
-        } else if (answers.role === 'Engineer') {
+        } else if (answers.menu === 'New Engineer') {
             const engineer = new Engineer('engineer', 'github', 'email');
-        } else if (answers.role === 'Intern') {
+        } else if (answers.menu === 'New Intern') {
             const intern = new Intern('intern', 'school', 'email');
         }
     })
