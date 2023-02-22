@@ -1,6 +1,9 @@
 // Include packages needed for application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
 const generateFile = ({name, email, id, office, github, school, role}) => 
 `
@@ -10,67 +13,69 @@ const generateFile = ({name, email, id, office, github, school, role}) =>
 // Create inquirer prompt questions for user input
 inquirer
     .prompt([
-        {
-            type: 'list',
-            name: 'role',
-            message: 'What Role does this employee hold?',
-            choices: ['Manager', 'Engineer', 'Intern'],
-        },
-        // prompts to follow a 'manager' selection
+        
+        // Inital prompts for the team Manager
         {
             type: 'input',
             name: 'manager',
-            message: "What is your Manager's first name?",
-            when: (answers) => answers.role === 'Manager',
+            message: "What is your Team Manager's first name?",
         },
         {
             type: 'input',
             name: 'office',
             message: 'What is the Office Number for this Manager?',
-            when: (answers) => answers.role === 'Manager',
         },
         {
             type: 'input',
             name: 'email',
             message: "What is the Manager's email address?",
-            when: (answers) => answers.role === 'Manager',
         },
          // prompts to follow a 'engineer' selection
          {
-            type: 'input',
-            name: 'engineer',
-            message: "What is your Engineer's first name?",
-            when: (answers) => answers.role === 'Engineer',
+            type: 'list',
+            name: 'menu',
+            message: "Please choose to add an Engineer, Intern, or exit the application if finshed",
+            choices: ['New Engineer', 'New Intern', 'Finished adding Team Members']
         },
         {
             type: 'input',
             name: 'github',
             message: 'What is the GitHub username for this Engineer?',
-            when: (answers) => answers.role === 'Engineer',
+            when: (answers) => answers.menu === 'New Engineer',
         },
         {
             type: 'input',
             name: 'email',
             message: "What is the Engineer's email address?",
-            when: (answers) => answers.role === 'Engineer',
+            when: (answers) => answers.menu === 'New Engineer',
         },
          // prompts to follow a 'intern' selection
          {
             type: 'input',
             name: 'intern',
             message: "What is your Intern's first name?",
-            when: (answers) => answers.role === 'Intern',
+            when: (answers) => answers.menu === 'New Intern',
         },
         {
             type: 'input',
             name: 'school',
             message: 'What is the School your Inter is enrolled?',
-            when: (answers) => answers.role === 'Intern',
+            when: (answers) => answers.menu === 'New Intern',
         },
         {
             type: 'input',
             name: 'email',
             message: "What is the Intern's email address?",
-            when: (answers) => answers.role === 'Intern',
+            when: (answers) => answers.menu === 'New Intern',
         }
     ])
+
+    .then((answers) => {
+        if (answers.role === 'Manager') {
+            const manager = new Manager('manager', 'office', 'email');
+        } else if (answers.role === 'Engineer') {
+            const engineer = new Engineer('engineer', 'github', 'email');
+        } else if (answers.role === 'Intern') {
+            const intern = new Intern('intern', 'school', 'email');
+        }
+    })
