@@ -29,7 +29,7 @@ const generateFile = ({}) =>
               <ul class="card-body list-group list-group-flush">
                   <li class="list-group-item">${Employee.getRole}</li>
                   <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:${Employee.getEmail}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
                   <li class="list-group-item">${Manager.getOfficeNumber}</li>
               </ul>
           </div>
@@ -38,7 +38,7 @@ const generateFile = ({}) =>
               <ul class="card-body list-group list-group-flush">
                   <li class="list-group-item">${Employee.getRole}</li>
                   <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:${Employee.getEmail}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
                   <li class="list-group-item">${Engineer.getGithub}</li>
               </ul>
           </div>
@@ -47,7 +47,7 @@ const generateFile = ({}) =>
               <ul class="card-body list-group list-group-flush">
                   <li class="list-group-item">${Employee.getRole}</li>
                   <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:${Employee.getemail}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
                   <li class="list-group-item">${Engineer.getGithub}</li>
               </ul>
           </div>
@@ -56,7 +56,7 @@ const generateFile = ({}) =>
               <ul class="card-body list-group list-group-flush">
                   <li class="list-group-item">${Employee.getRole}</li>
                   <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:${Employee.getemail}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
                   <li class="list-group-item">${Intern.getSchool}</li>
               </ul>
           </div>
@@ -65,7 +65,7 @@ const generateFile = ({}) =>
               <ul class="card-body list-group list-group-flush">
                   <li class="list-group-item">${Employee.getRole}</li>
                   <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:${Employee.getemail}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
                   <li class="list-group-item">${Intern.getSchool}</li>
               </ul>
           </div>
