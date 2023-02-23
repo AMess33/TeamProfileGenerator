@@ -6,7 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const generateFile = ({employee, Engineer, Manager, Intern}) =>
+const generateFile = ({}) =>
   `<!DOCTYPE html>
   <html lang="en">
   
@@ -21,52 +21,52 @@ const generateFile = ({employee, Engineer, Manager, Intern}) =>
   <body class="justify-content-center">
       <div class="d-flex justify-content-center bg-primary">
           <h1 class="bg-success bg-gradient text-light m-3 p-3 border border-3 border-light rounded-pill">
-              ${employee.getName}'s Team Roster</h1>
+              ${Employee.getName}'s Team Roster</h1>
       </div>
       <section class="p-3 m-3 d-inline-flex flex-wrap mx-auto justify-content-center">
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${employee.getRole}</li>
-                  <li class="list-group-item">${employee.getId}</li>
-                  <li class="list-group-item">eMail:${employee.getEmail}</li>
-                  <li class="list-group-item">${engineer.getOfficeNumber}</li>
+                  <li class="list-group-item">${Employee.getRole}</li>
+                  <li class="list-group-item">${Employee.getId}</li>
+                  <li class="list-group-item">eMail:${Employee.getEmail}</li>
+                  <li class="list-group-item">${Manager.getOfficeNumber}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${employee.getRole}</li>
-                  <li class="list-group-item">${employee.getId}</li>
-                  <li class="list-group-item">eMail:${employee.getEmail}</li>
-                  <li class="list-group-item">${employee.getGithub}</li>
+                  <li class="list-group-item">${Employee.getRole}</li>
+                  <li class="list-group-item">${Employee.getId}</li>
+                  <li class="list-group-item">eMail:${Employee.getEmail}</li>
+                  <li class="list-group-item">${Engineer.getGithub}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${employee.getRole}</li>
-                  <li class="list-group-item">${employee.getId}</li>
-                  <li class="list-group-item">eMail:${employee.getemail}</li>
-                  <li class="list-group-item">${employee.getGithub}</li>
+                  <li class="list-group-item">${Employee.getRole}</li>
+                  <li class="list-group-item">${Employee.getId}</li>
+                  <li class="list-group-item">eMail:${Employee.getemail}</li>
+                  <li class="list-group-item">${Engineer.getGithub}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${employee.getRole}</li>
-                  <li class="list-group-item">${employee.getId}</li>
-                  <li class="list-group-item">eMail:${employee.getemail}</li>
-                  <li class="list-group-item">${employee.getSchool}</li>
+                  <li class="list-group-item">${Employee.getRole}</li>
+                  <li class="list-group-item">${Employee.getId}</li>
+                  <li class="list-group-item">eMail:${Employee.getemail}</li>
+                  <li class="list-group-item">${Intern.getSchool}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${employee.getRole}</li>
-                  <li class="list-group-item">${employee.getId}</li>
-                  <li class="list-group-item">eMail:${employee.getemail}</li>
-                  <li class="list-group-item">${employee.getSchool}</li>
+                  <li class="list-group-item">${Employee.getRole}</li>
+                  <li class="list-group-item">${Employee.getId}</li>
+                  <li class="list-group-item">eMail:${Employee.getemail}</li>
+                  <li class="list-group-item">${Intern.getSchool}</li>
               </ul>
           </div>
       </section>
@@ -140,7 +140,7 @@ inquirer
             {
               type: 'input',
               name: 'school',
-              message: 'What is the School your Inter is enrolled?',
+              message: 'What is the School your Intern is enrolled?',
               when: (answers) => answers.menu === 'New Intern',
             },
             {
