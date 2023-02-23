@@ -6,7 +6,73 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
 const generateFile = ({ name, email, id, office, github, school, role }) =>
-  `
+  `<!DOCTYPE html>
+  <html lang="en">
+  
+  <head>
+      <meta charset="UTF-8" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+      <link rel="stylesheet" href="assets/styles.css">
+      <title>Team Roster</title>
+  </head>
+  
+  <body class="justify-content-center">
+      <div class="d-flex justify-content-center bg-primary">
+          <h1 class="bg-success bg-gradient text-light m-3 p-3 border border-3 border-light rounded-pill">
+              ${Manager.name}'s Team Roster</h1>
+      </div>
+      <section class="p-3 m-3 d-inline-flex flex-wrap mx-auto justify-content-center">
+          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <ul class="card-body list-group list-group-flush">
+                  <li class="list-group-item">${Employee[0].role}</li>
+                  <li class="list-group-item">${Employee[0].id}</li>
+                  <li class="list-group-item">eMail:${Employee[0].email}</li>
+                  <li class="list-group-item">${Employee[0].office}</li>
+              </ul>
+          </div>
+          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <ul class="card-body list-group list-group-flush">
+                  <li class="list-group-item">${Employee[1].role}</li>
+                  <li class="list-group-item">${Employee[1].id}</li>
+                  <li class="list-group-item">eMail:${Employee[1].email}</li>
+                  <li class="list-group-item">${Employee[1].github}</li>
+              </ul>
+          </div>
+          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <ul class="card-body list-group list-group-flush">
+                  <li class="list-group-item">${Employee[2].role}</li>
+                  <li class="list-group-item">${Employee[2].id}</li>
+                  <li class="list-group-item">eMail:${Employee[2].email}</li>
+                  <li class="list-group-item">${Employee[2].github}</li>
+              </ul>
+          </div>
+          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <ul class="card-body list-group list-group-flush">
+                  <li class="list-group-item">${Employee[3].role}</li>
+                  <li class="list-group-item">${Employee[3].id}</li>
+                  <li class="list-group-item">eMail:${Employee[3].email}</li>
+                  <li class="list-group-item">${Employee[3].school}</li>
+              </ul>
+          </div>
+          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <ul class="card-body list-group list-group-flush">
+                  <li class="list-group-item">${Employee[4].role}</li>
+                  <li class="list-group-item">${Employee[4].id}</li>
+                  <li class="list-group-item">eMail:${Employee[4].email}</li>
+                  <li class="list-group-item">${Employee[4].school}</li>
+              </ul>
+          </div>
+      </section>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+          integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+          crossorigin="anonymous"></script>
+  </body>
 
 `
 
@@ -83,6 +149,10 @@ inquirer
               const intern = new Intern('intern', 'school', 'email');
             } else if (answers.menu === 'Finished adding Team Members') {
               isFinished = true;
+              const pageContent = generateFile(answers);
+              fs.writeFile('index.html', pageContent, (err) =>
+                err ? console.log(err) : console.log('Successfully created index.html!')
+              );
             }
           })
       }
