@@ -1,11 +1,12 @@
 // Include packages needed for application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const generateFile = ({ name, email, id, office, github, school, role }) =>
+const generateFile = ({employee, Engineer, Manager, Intern}) =>
   `<!DOCTYPE html>
   <html lang="en">
   
@@ -20,52 +21,52 @@ const generateFile = ({ name, email, id, office, github, school, role }) =>
   <body class="justify-content-center">
       <div class="d-flex justify-content-center bg-primary">
           <h1 class="bg-success bg-gradient text-light m-3 p-3 border border-3 border-light rounded-pill">
-              ${Manager.name}'s Team Roster</h1>
+              ${employee.getName}'s Team Roster</h1>
       </div>
       <section class="p-3 m-3 d-inline-flex flex-wrap mx-auto justify-content-center">
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee[0].role}</li>
-                  <li class="list-group-item">${Employee[0].id}</li>
-                  <li class="list-group-item">eMail:${Employee[0].email}</li>
-                  <li class="list-group-item">${Employee[0].office}</li>
+                  <li class="list-group-item">${employee.getRole}</li>
+                  <li class="list-group-item">${employee.getId}</li>
+                  <li class="list-group-item">eMail:${employee.getEmail}</li>
+                  <li class="list-group-item">${engineer.getOfficeNumber}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee[1].role}</li>
-                  <li class="list-group-item">${Employee[1].id}</li>
-                  <li class="list-group-item">eMail:${Employee[1].email}</li>
-                  <li class="list-group-item">${Employee[1].github}</li>
+                  <li class="list-group-item">${employee.getRole}</li>
+                  <li class="list-group-item">${employee.getId}</li>
+                  <li class="list-group-item">eMail:${employee.getEmail}</li>
+                  <li class="list-group-item">${employee.getGithub}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee[2].role}</li>
-                  <li class="list-group-item">${Employee[2].id}</li>
-                  <li class="list-group-item">eMail:${Employee[2].email}</li>
-                  <li class="list-group-item">${Employee[2].github}</li>
+                  <li class="list-group-item">${employee.getRole}</li>
+                  <li class="list-group-item">${employee.getId}</li>
+                  <li class="list-group-item">eMail:${employee.getemail}</li>
+                  <li class="list-group-item">${employee.getGithub}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee[3].role}</li>
-                  <li class="list-group-item">${Employee[3].id}</li>
-                  <li class="list-group-item">eMail:${Employee[3].email}</li>
-                  <li class="list-group-item">${Employee[3].school}</li>
+                  <li class="list-group-item">${employee.getRole}</li>
+                  <li class="list-group-item">${employee.getId}</li>
+                  <li class="list-group-item">eMail:${employee.getemail}</li>
+                  <li class="list-group-item">${employee.getSchool}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">Andrew</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${employee.getName}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee[4].role}</li>
-                  <li class="list-group-item">${Employee[4].id}</li>
-                  <li class="list-group-item">eMail:${Employee[4].email}</li>
-                  <li class="list-group-item">${Employee[4].school}</li>
+                  <li class="list-group-item">${employee.getRole}</li>
+                  <li class="list-group-item">${employee.getId}</li>
+                  <li class="list-group-item">eMail:${employee.getemail}</li>
+                  <li class="list-group-item">${employee.getSchool}</li>
               </ul>
           </div>
       </section>
@@ -99,11 +100,10 @@ inquirer
 
   .then(async (answers) => {
     if (answers.office !== undefined) {
-      const manager = new Manager('manager', 'office', 'email');
+      const manager = new Manager('manager', 'email', 'office');
       let isFinished = false;
 
       while (isFinished === false) {
-        // prompts to follow a 'engineer' selection
         await inquirer
           .prompt([
             {
@@ -111,6 +111,12 @@ inquirer
               name: 'menu',
               message: "Please choose to add an Engineer, Intern, or exit the application if finshed",
               choices: ['New Engineer', 'New Intern', 'Finished adding Team Members']
+            },
+            {
+              type: 'input',
+              name: 'engineer',
+              message: "What is your Engineer's first name?",
+              when: (answers) => answers.menu === 'New Engineer',
             },
             {
               type: 'input',
@@ -124,6 +130,7 @@ inquirer
               message: "What is the Engineer's email address?",
               when: (answers) => answers.menu === 'New Engineer',
             },
+
             {
               type: 'input',
               name: 'intern',
@@ -144,9 +151,9 @@ inquirer
             }])
           .then((answers) => {
             if (answers.menu === 'New Engineer') {
-              const engineer = new Engineer('engineer', 'github', 'email');
+              const engineer = new Engineer('engineer', 'email', 'github');
             } else if (answers.menu === 'New Intern') {
-              const intern = new Intern('intern', 'school', 'email');
+              const intern = new Intern('intern', 'email', 'school');
             } else if (answers.menu === 'Finished adding Team Members') {
               isFinished = true;
               const pageContent = generateFile(answers);
