@@ -5,8 +5,8 @@ const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-
-const generateFile = ({}) =>
+let finalAnswers = []
+const generateFile = ({engineer, intern, manager}) =>
   `<!DOCTYPE html>
   <html lang="en">
   
@@ -21,52 +21,52 @@ const generateFile = ({}) =>
   <body class="justify-content-center">
       <div class="d-flex justify-content-center bg-primary">
           <h1 class="bg-success bg-gradient text-light m-3 p-3 border border-3 border-light rounded-pill">
-              ${Employee.getName}'s Team Roster</h1>
+              ${manager.getName()}'s Team Roster</h1>
       </div>
       <section class="p-3 m-3 d-inline-flex flex-wrap mx-auto justify-content-center">
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${manager.getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee.getRole}</li>
-                  <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
-                  <li class="list-group-item">${Manager.getOfficeNumber}</li>
+                  <li class="list-group-item">${manager.getRole()}</li>
+                  <li class="list-group-item">${manager.getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${manager.getEmail()}">${manager.getEmail()}</a></li>
+                  <li class="list-group-item">${manager.getOfficeNumber()}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${engineer.getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee.getRole}</li>
-                  <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
-                  <li class="list-group-item">${Engineer.getGithub}</li>
+                  <li class="list-group-item">${engineer.getRole()}</li>
+                  <li class="list-group-item">${engineer.getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                  <li class="list-group-item">${engineer.getGithub()}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${engineer.getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee.getRole}</li>
-                  <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
-                  <li class="list-group-item">${Engineer.getGithub}</li>
+                  <li class="list-group-item">${engineer.getRole()}</li>
+                  <li class="list-group-item">${engineer.getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                  <li class="list-group-item">${engineer.getGithub()}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${intern.getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee.getRole}</li>
-                  <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
-                  <li class="list-group-item">${Intern.getSchool}</li>
+                  <li class="list-group-item">${intern.getRole()}</li>
+                  <li class="list-group-item">${intern.getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a></li>
+                  <li class="list-group-item">${intern.getSchool()}</li>
               </ul>
           </div>
           <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${Employee.getName}</h4>
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${intern.getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${Employee.getRole}</li>
-                  <li class="list-group-item">${Employee.getId}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${Employee.getEmail}">${Employee.getEmail}</a></li>
-                  <li class="list-group-item">${Intern.getSchool}</li>
+                  <li class="list-group-item">${intern.getRole()}</li>
+                  <li class="list-group-item">${intern.getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a></li>
+                  <li class="list-group-item">${intern.getSchool()}</li>
               </ul>
           </div>
       </section>
@@ -104,6 +104,7 @@ inquirer
       let isFinished = false;
 
       while (isFinished === false) {
+        finalAnswers.push(answers);
         await inquirer
           .prompt([
             {
@@ -150,17 +151,19 @@ inquirer
               when: (answers) => answers.menu === 'New Intern',
             }])
           .then((answers) => {
-            if (answers.menu === 'New Engineer') {
-              const engineer = new Engineer('engineer', 'email', 'github');
-            } else if (answers.menu === 'New Intern') {
-              const intern = new Intern('intern', 'email', 'school');
-            } else if (answers.menu === 'Finished adding Team Members') {
-              isFinished = true;
-              const pageContent = generateFile(answers);
-              fs.writeFile('index.html', pageContent, (err) =>
-                err ? console.log(err) : console.log('Successfully created index.html!')
-              );
-            }
+            console.log(finalAnswers);
+            // if (answers.menu === 'New Engineer') {
+            //   const engineer = new Engineer('engineer', 'email', 'github');
+            // } else if (answers.menu === 'New Intern') {
+            //   const intern = new Intern('intern', 'email', 'school');
+            // } else if (answers.menu === 'Finished adding Team Members') {
+            //   isFinished = true;
+            //   const pageContent = generateFile(engineer, intern, manager);
+              
+            //   fs.writeFile('index.html', pageContent, (err) =>
+            //     err ? console.log(err) : console.log('Successfully created index.html!')
+            //   );
+          //   }
           })
       }
     }
