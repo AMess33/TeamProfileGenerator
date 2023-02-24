@@ -96,7 +96,6 @@ const menu = () => {
         choices: ['New Engineer', 'New Intern', 'Finished adding Team Members']
       }])
     .then((answers) => {
-      console.log(answers);
       if (answers.menu === 'New Engineer') {
         engineerQuestions()
       } else if (answers.menu === 'New Intern') {
