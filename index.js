@@ -85,7 +85,7 @@ inquirer
     finalAnswers.push(manager);
     menu();
   });
-
+// function after the initial prompts to ask user to create engineer, intern, or exit application
 const menu = () => {
   inquirer
     .prompt([
@@ -103,7 +103,6 @@ const menu = () => {
         internQuestions()
       } else {
         const pageContent = generateFile();
-        console.log(finalAnswers);
 
         fs.writeFile('index.html', pageContent, (err) =>
           err ? console.log(err) : console.log('Successfully created index.html!')
@@ -112,7 +111,8 @@ const menu = () => {
 
     })
 }
-
+// function called when engineer is selected from menu()
+  // questions used to build engineer
 const engineerQuestions = () => {
   inquirer
     .prompt([
@@ -139,7 +139,8 @@ const engineerQuestions = () => {
     })
 };
 
-
+// function called when intern is selected
+  // questions used to build intern
 const internQuestions = () => {
   inquirer
     .prompt([
