@@ -14,7 +14,7 @@ This application is used to create a team roster in a working enviornment. A Man
 
 When you run node index.js within the terminal you will be prompted with questions that about the Manager of your team. Once you answer the first set of questions about the Manager, you will be asked to add members to the team. If you choose to add an Engineer, you will be asked 3 questions relevent to the Engineer position. Once you have answered the Engineer questions you will be taken back to the menu prompt and again asked to add members to your team. If you select add Intern, you will be prompted with 3 relevent questions about your Intner and then return to the menu. When you are done creating your roster of employees and you select 'Finished adding employees', the application will create an Index.HTML file and you can launch the file in a web browser and see the team Roster on a webpage. 
 
-[Video Walkthrough]()
+[Video Walkthrough](https://drive.google.com/file/d/1pDidbnlMT4nN360ziiG2a3H1cTiCsQ81/view)
 
-![Team Roster Webpage Screenshot]()
+![Team Roster Webpage Screenshot](./dist/Screenshot%202023-02-24%20at%209.54.26%20AM.png)
 
