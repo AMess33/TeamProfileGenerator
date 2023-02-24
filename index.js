@@ -6,7 +6,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 let finalAnswers = []
-const generateFile = ({engineer, intern, manager}) =>
+const generateFile = () =>
   `<!DOCTYPE html>
   <html lang="en">
   
@@ -21,52 +21,34 @@ const generateFile = ({engineer, intern, manager}) =>
   <body class="justify-content-center">
       <div class="d-flex justify-content-center bg-primary">
           <h1 class="bg-success bg-gradient text-light m-3 p-3 border border-3 border-light rounded-pill">
-              ${manager.getName()}'s Team Roster</h1>
+              ${finalAnswers[0].getName()}'s Team Roster</h1>
       </div>
       <section class="p-3 m-3 d-inline-flex flex-wrap mx-auto justify-content-center">
-          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${manager.getName()}</h4>
+          <div class="card col-5 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${finalAnswers[0].getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${manager.getRole()}</li>
-                  <li class="list-group-item">${manager.getId()}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${manager.getEmail()}">${manager.getEmail()}</a></li>
-                  <li class="list-group-item">${manager.getOfficeNumber()}</li>
+                  <li class="list-group-item">${finalAnswers[0].getRole()}</li>
+                  <li class="list-group-item">Employee ID# ${finalAnswers[0].getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${finalAnswers[0].getEmail()}">${finalAnswers[0].getEmail()}</a></li>
+                  <li class="list-group-item">Office Number: ${finalAnswers[0].getOfficeNumber()}</li>
               </ul>
           </div>
-          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${engineer.getName()}</h4>
+          <div class="card col-5 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${finalAnswers[1].getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${engineer.getRole()}</li>
-                  <li class="list-group-item">${engineer.getId()}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-                  <li class="list-group-item">${engineer.getGithub()}</li>
+                  <li class="list-group-item">${finalAnswers[1].getRole()}</li>
+                  <li class="list-group-item">Employee ID# ${finalAnswers[1].getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${finalAnswers[1].getEmail()}">${finalAnswers[1].getEmail()}</a></li>
+                  <li class="list-group-item">GitHub Username:<a href="github.com/${finalAnswers[1].getGithub()}"> ${finalAnswers[1].getGithub()}</a></li>
               </ul>
           </div>
-          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${engineer.getName()}</h4>
+          <div class="card col-5 p-3 m-3 border border-primary border-3 rounded bg-secondary">
+              <h4 class="card-title text-center fw-bold text-uppercase text-light">${finalAnswers[2].getName()}</h4>
               <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${engineer.getRole()}</li>
-                  <li class="list-group-item">${engineer.getId()}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-                  <li class="list-group-item">${engineer.getGithub()}</li>
-              </ul>
-          </div>
-          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${intern.getName()}</h4>
-              <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${intern.getRole()}</li>
-                  <li class="list-group-item">${intern.getId()}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a></li>
-                  <li class="list-group-item">${intern.getSchool()}</li>
-              </ul>
-          </div>
-          <div class="card col-4 p-3 m-3 border border-primary border-3 rounded bg-secondary">
-              <h4 class="card-title text-center fw-bold text-uppercase text-light">${intern.getName()}</h4>
-              <ul class="card-body list-group list-group-flush">
-                  <li class="list-group-item">${intern.getRole()}</li>
-                  <li class="list-group-item">${intern.getId()}</li>
-                  <li class="list-group-item">eMail:<a href="mailto: ${intern.getEmail()}">${intern.getEmail()}</a></li>
-                  <li class="list-group-item">${intern.getSchool()}</li>
+                  <li class="list-group-item">${finalAnswers[2].getRole()}</li>
+                  <li class="list-group-item">Employee ID# ${finalAnswers[2].getId()}</li>
+                  <li class="list-group-item">eMail:<a href="mailto: ${finalAnswers[2].getEmail()}">${finalAnswers[2].getEmail()}</a></li>
+                  <li class="list-group-item">School: ${finalAnswers[2].getSchool()}</li>
               </ul>
           </div>
       </section>
@@ -98,76 +80,91 @@ inquirer
       message: "What is the Manager's email address?",
     }])
 
-  .then(async (answers) => {
-    if (answers.office !== undefined) {
-      const manager = new Manager('manager', 'email', 'office');
-      let isFinished = false;
+  .then((answers) => {
+    const manager = new Manager(answers.manager, answers.email, answers.office);
+    finalAnswers.push(manager);
+    menu();
+  });
 
-      while (isFinished === false) {
-        finalAnswers.push(answers);
-        await inquirer
-          .prompt([
-            {
-              type: 'list',
-              name: 'menu',
-              message: "Please choose to add an Engineer, Intern, or exit the application if finshed",
-              choices: ['New Engineer', 'New Intern', 'Finished adding Team Members']
-            },
-            {
-              type: 'input',
-              name: 'engineer',
-              message: "What is your Engineer's first name?",
-              when: (answers) => answers.menu === 'New Engineer',
-            },
-            {
-              type: 'input',
-              name: 'github',
-              message: 'What is the GitHub username for this Engineer?',
-              when: (answers) => answers.menu === 'New Engineer',
-            },
-            {
-              type: 'input',
-              name: 'email',
-              message: "What is the Engineer's email address?",
-              when: (answers) => answers.menu === 'New Engineer',
-            },
+const menu = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'menu',
+        message: "Please choose to add an Engineer, Intern, or exit the application if finshed",
+        choices: ['New Engineer', 'New Intern', 'Finished adding Team Members']
+      }])
+    .then((answers) => {
+      console.log(answers);
+      if (answers.menu === 'New Engineer') {
+        engineerQuestions()
+      } else if (answers.menu === 'New Intern') {
+        internQuestions()
+      } else {
+        const pageContent = generateFile();
+        console.log(finalAnswers);
 
-            {
-              type: 'input',
-              name: 'intern',
-              message: "What is your Intern's first name?",
-              when: (answers) => answers.menu === 'New Intern',
-            },
-            {
-              type: 'input',
-              name: 'school',
-              message: 'What is the School your Intern is enrolled?',
-              when: (answers) => answers.menu === 'New Intern',
-            },
-            {
-              type: 'input',
-              name: 'email',
-              message: "What is the Intern's email address?",
-              when: (answers) => answers.menu === 'New Intern',
-            }])
-          .then((answers) => {
-            console.log(finalAnswers);
-            // if (answers.menu === 'New Engineer') {
-            //   const engineer = new Engineer('engineer', 'email', 'github');
-            // } else if (answers.menu === 'New Intern') {
-            //   const intern = new Intern('intern', 'email', 'school');
-            // } else if (answers.menu === 'Finished adding Team Members') {
-            //   isFinished = true;
-            //   const pageContent = generateFile(engineer, intern, manager);
-              
-            //   fs.writeFile('index.html', pageContent, (err) =>
-            //     err ? console.log(err) : console.log('Successfully created index.html!')
-            //   );
-          //   }
-          })
+        fs.writeFile('index.html', pageContent, (err) =>
+          err ? console.log(err) : console.log('Successfully created index.html!')
+        );
       }
-    }
-  })
 
+    })
+}
+
+const engineerQuestions = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'engineer',
+        message: "What is your Engineer's first name?",
+      },
+      {
+        type: 'input',
+        name: 'github',
+        message: 'What is the GitHub username for this Engineer?',
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: "What is the Engineer's email address?",
+      }
+    ])
+    .then((answers) => {
+      const engineer = new Engineer(answers.engineer, answers.email, answers.github);
+      finalAnswers.push(engineer);
+      menu();
+    })
+};
+
+
+const internQuestions = () => {
+  inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'intern',
+        message: "What is your Intern's first name?",
+      },
+      {
+        type: 'input',
+        name: 'school',
+        message: 'What is the School your Intern is enrolled?',
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: "What is the Intern's email address?",
+      }
+    ])
+
+    .then((answers) => {
+      const intern = new Intern(answers.intern, answers.email, answers.school);
+      finalAnswers.push(intern);
+      menu();
+    })
+};
 
 
